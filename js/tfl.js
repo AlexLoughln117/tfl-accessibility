@@ -1,24 +1,20 @@
 export const fetchTFL = async () => {
-      fetch("https://tfl.gov.uk/tfl/syndication/feeds/step-free-tube-guide.xml")
-      .then(response => response.text())
-      .then(data => {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data, "application/xml");
-        console.log(xml);
+  try {
+    const response = await fetch("https://tfl.gov.uk/tfl/syndication/feeds/step-free-tube-guide.xml");
+    const data = await response.text();
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(data, "application/xml");
 
-            var x, i, j, accessibilityLevel, txt, txt2;
-            txt = "";
-            txt2 = "";
-            x = xml.getElementsByTagName('StationName');
-            accessibilityLevel = xml.getElementsByTagName('AccessibilityType');
-            for (i = 0 ; i <x.length; i++) {
-                txt += x[i].childNodes[0].nodeValue + "<br>";
-            }
-           for (j = 0 ; j <accessibilityLevel.length; j++) {
-                txt2 += accessibilityLevel[j].childNodes[0].nodeValue + "<br>";
-           }
-            document.getElementById("column1-inner").innerHTML = txt;
-            document.getElementById("column2-inner").innerHTML = txt2;
-      })
-      .catch(console.error);
-  };
+    const stationNames = xml.getElementsByTagName("StationName");
+    const accessibilityLevels = xml.getElementsByTagName("AccessibilityType");
+
+    const stationNameText = Array.from(stationNames).map((station) => station.textContent).join("<br>");
+    const accessibilityLevelText = Array.from(accessibilityLevels).map((level) => level.textContent).join("<br>");
+
+    document.getElementById("column1-inner").innerHTML = stationNameText;
+    document.getElementById("column2-inner").innerHTML = accessibilityLevelText;
+
+  } catch (error) {
+    console.error(error);
+  }
+};
