@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --color-primary: #0070f3;
+  --color-secondary: #0070f3;
+  --color-accent: #ef4444;
+  --color-background: #ffffff;
+  --color-text: #1f2937;
+}
+
+.dark {
+  --color-primary: #3b82f6;
+  --color-secondary: #0284c7;
+  --color-accent: #f87171;
+  --color-background: #1f2937;
+  --color-text: #f9fafb;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-inter);
+    @apply scroll-smooth;
+  }
+  
+  body {
+    @apply bg-white dark:bg-gray-900 text-gray-900 dark:text-white;
+    font-family: var(--font-inter);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-poppins);
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  /* Skip Link */
+  .skip-link {
+    @apply absolute z-50 p-2 bg-blue-600 text-white -translate-y-20 focus:translate-y-0 transition-transform duration-200;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  /* Form Elements */
+  .form-group {
+    @apply mb-4;
+  }
+  
+  .form-group label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-200 mb-1;
+  }
+  
+  .input-with-icon {
+    @apply relative;
+  }
+  
+  .input-with-icon input,
+  .input-with-icon select {
+    @apply pl-10 w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white;
+    @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+  }
+  
+  .input-with-icon svg,
+  .input-with-icon i {
+    @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400;
+  }
+  
+  /* Buttons */
+  .primary-button {
+    @apply px-6 py-2 bg-blue-600 text-white rounded-lg font-medium;
+    @apply hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply transition-colors duration-200;
+  }
+  
+  .secondary-button {
+    @apply px-6 py-2 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200 rounded-lg font-medium;
+    @apply hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply transition-colors duration-200;
+  }
+  
+  /* Accessibility Elements */
+  .accessibility-info {
+    @apply mt-1 p-2 text-sm bg-blue-50 dark:bg-blue-900 text-blue-800 dark:text-blue-100 rounded-md;
+    @apply flex items-start;
+  }
+  
+  /* Back to Top Button */
+  #back-to-top {
+    @apply fixed bottom-6 right-6 p-3 rounded-full bg-blue-600 text-white shadow-lg;
+    @apply hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
+    @apply opacity-0 invisible;
+    @apply transition-all duration-300;
+    z-index: 50;
+  }
+
+  #back-to-top.visible {
+    @apply opacity-100 visible;
+  }
+  
+  /* Spinner */
+  .spinner {
+    @apply fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50;
+    @apply opacity-0 invisible transition-opacity duration-300;
+  }
+  
+  .spinner.visible {
+    @apply opacity-100 visible;
+  }
+  
+  .spinner-content {
+    @apply bg-white dark:bg-gray-800 p-6 rounded-lg shadow-xl max-w-md w-full mx-4;
+  }
+  
+  .progress-bar {
+    @apply w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden mt-4;
+  }
+  
+  .progress-fill {
+    @apply h-full bg-blue-600 rounded-full;
+    animation: progress 2s ease-in-out infinite;
+    width: 0%;
+  }
+  
+  @keyframes progress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+  }
+  
+  /* Cookie Consent */
+  .cookie-banner {
+    @apply fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-800 p-4 shadow-lg z-50;
+    @apply border-t border-gray-200 dark:border-gray-700;
+    @apply transform translate-y-full transition-transform duration-300;
+  }
+  
+  .cookie-banner.visible {
+    @apply transform translate-y-0;
+  }
+  
+  /* Noscript Message */
+  .noscript-message {
+    @apply fixed inset-0 bg-white dark:bg-gray-900 p-6 z-[100] flex flex-col items-center justify-center text-center;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Print Styles */
+@media print {
+  header, footer, .journey-planner, #back-to-top, .cookie-banner {
+    display: none !important;
+  }
+  
+  .map-wrapper {
+    page-break-inside: avoid;
+  }
+} 

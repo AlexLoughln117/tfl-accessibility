@@ -1,0 +1,17 @@
+Files to remove after migrating to Next.js:
+
+1. index.html - replaced by Next.js pages and components
+2. accessibility.html - replaced by Next.js pages and components
+3. css/*.css - replaced by Tailwind CSS and component styles
+4. js/*.js - replaced by TypeScript components and API integration
+5. gulpfile.js - no longer needed as Next.js has its own build system
+6. package-lock.json - will be replaced by Next.js package-lock.json
+7. package.json - will be replaced by Next.js package.json
+8. server.js - replaced by Next.js API routes and server components
+9. .htaccess - replaced by Next.js routing and middleware
+10. update-sass-imports.js - no longer needed with Tailwind CSS
+
+Note: 
+- Keep 'assets' folder for images and other static assets
+- If data folder contains important JSON data, migrate it to Next.js public folder
+- Consider migrating GitHub actions/workflows if needed 
